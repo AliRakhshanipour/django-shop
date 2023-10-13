@@ -3,11 +3,21 @@
         <div class="navbar-nav">
             <a class="nav-link active" href="{% url "home:home" %}">Home</a>
             {% if request.user.is_authenticated %}
+                {% if request.user.is_admin %}
+                    <a class="nav-link active" href="{% url "home:bucket" %}">Bucket</a>
+                {% endif %}
                 <a class="nav-link active" href="{% url "accounts:user-logout" %}">Logout</a>
             {% else %}
                 <a class="nav-link active" href="{% url "accounts:user-register" %}">Register</a>
                 <a class="nav-link active" href="{% url "accounts:user-login" %}">Login</a>
             {% endif %}
+            
         </div>
+        {% if request.user.is_authenticated %}
+        <span class="navbar-text text-left">
+            {{request.user}}
+        </span>
+        {% endif %}
+
     </div>
 </nav>
